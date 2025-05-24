@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1, 
+        "blocksPerContainer" : 4,
+        "containers": [
+            ["pink", "purple", "blue", "purple"],
+            ["pink", "blue", "yellow", "purple"],
+            ["blue", "yellow", "pink", "yellow"],
+            ["purple", "blue", "yellow", "pink"],
+            [],
+            []
+        ] 
+    }, 
+
+    {
+        "id": 2, 
+        "blocksPerContainer" : 4,
+        "containers": [
+            ["yellow", "pink", "blue", "orange"],
+            ["green", "pink", "blue", "midnightgreen"],
+            ["purple", "red", "pink", "purple"],
+            ["orange", "yellow", "green", "pink"],
+            ["purple", "red", "green", "midnightgreen"],
+            ["red", "yellow", "orange", "blue"],
+            ["orange", "blue", "midnightgreen", "yellow"],
+            ["red", "purple", "midnightgreen", "green"],
+            [],
+            []
+        ]
+
+
+    },
+
+    {
+        "id": 3, 
+        "blocksPerContainer" : 4,
+        "containers": [
+            ["purple", "black", "blue", "crimson"],
+            ["orange", "black", "green", "blue"],
+            ["midnightgreen", "red", "grey", "crimson"],
+            ["purple", "yellow", "purple", "yellow"],
+            ["midnightgreen", "red", "grey", "midnightgreen"],
+            ["midnightgreen", "blue", "orange", "grey"],
+            ["red", "orange", "crimson", "orange"],
+            ["yellow", "crimson", "yellow", "black"],
+            ["red", "blue", "green", "black"],
+            ["grey", "green", "purple", "green"],
+            [],
+            []
+        ]
+
+    }
+]
+
