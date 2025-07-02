@@ -1,0 +1,96 @@
+body {
+    background-color: #0f0f1f;
+    color: #fefefe;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Space out main sections */
+main > section {
+    margin-bottom: 20px;
+}
+
+/* Headline section tweaks */
+#headline {
+    padding: 0 20px 40px 20px;
+}
+
+#headline h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 25px 0;
+}
+
+#headline h2 {
+    color: #cccccc;
+    margin: 0 0 12px 0;
+}
+
+#headline h3 {
+    color: #cccccc;
+    margin: 0 0 0 0;
+    
+}
+
+/* Email funnel styling */
+#email-funnel {
+    margin: 5px auto;
+    max-width: 400px;
+   
+}
+
+.ml-embedded {
+    margin: 0 auto;
+}
+
+button {
+    background-color: #ff00cc;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d100aa;
+}
+
+/* Countdown timer styling */
+#countdown-timer {
+    margin-top: 40px;
+    padding: 0 10px;
+}
+
+#countdown-timer h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #f9d423, #ff4e50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 20px 0 5px 0;
+}
+
+#countdown-timer h3 {
+    margin: 0;
+    color: #888;
+}
+
+#img-section{
+    margin-top: 80px;
+}

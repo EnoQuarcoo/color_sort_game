@@ -1,8 +1,6 @@
+let blocksPerContainer; 
 
 
-//Grab all the containers
-const colorContainers = document.querySelectorAll(".container"); 
-let blocksPerContainer = 4; 
 
 //Keeps track of what block and container have been lifted 
 let liftedBlock = null; 
@@ -10,7 +8,8 @@ let liftedContainer = null;
 
 //Remove the lifted class from all blocks 
 function removeAllLiftedClasses(){
-    colorContainers.forEach(function(container){
+    const containers = document.querySelectorAll(".container");
+    containers.forEach(function(container){
                 const allColorBlocks = container.querySelectorAll(".color-block");
                 allColorBlocks.forEach(function(block){
                     block.classList.remove('lifted');
@@ -114,70 +113,99 @@ function handleWin() {
 
 }
 
+function getTodaysPuzzle (){
+    //Get today's date 
+    const todaysDate = new Date();
+    const currentYear = todaysDate.getFullYear();
+    const firstDayOfYear = new Date(currentYear, 0 , 1 );
+    //Calculate difference in milliseconds 
+    const diffInMs = todaysDate - firstDayOfYear  
+    const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
+    //Calculate what today's game should be 
+    const gameIndex = dayOfYear % 3;
+    console.log("Today's game is", gameIndex )
+    return gameIndex; 
+}
+
+function displayGame(todaysGame){
+    //grab the containers array from that game. 
+    numberOfContainers = todaysGame.containers.length
+    console.log("the number of containers is", numberOfContainers);
+    const allContainersSection = document.querySelector("#all-containers");
+    allContainersSection.innerHTML = "";
+    todaysGame.containers.forEach((container) => {
+        //console.log("coooool")
+        const newContainer = document.createElement("div");
+        allContainersSection.appendChild(newContainer);
+        newContainer.classList.add("container")
+        
+        container.forEach((color) => {
+            const newColorBlock = document.createElement("div")
+            newColorBlock.classList.add("color-block", color);
+            newContainer.appendChild(newColorBlock)
+        })
+
+    });
+    attachContainerListeners();
+}
 
 
-//Listen for a click on each container. Attach an event listener to each contianer
-colorContainers.forEach( function(containerElement){
-    containerElement.addEventListener("click", function(){
-        const clickedContainer = containerElement;  
-        //If a block is already lifted. 
-    if (liftedBlock) {
-        // We already have a lifted block
 
-        removeAllLiftedClasses();
+function attachContainerListeners() {
+    //Grab all the containers
+    const colorContainers = document.querySelectorAll(".container"); 
 
-        if (clickedContainer !== liftedContainer) {
-            const newTopBlock = getTopBlock(clickedContainer);
-            const newContainerIsEmpty = !newTopBlock;
-            const colorsMatch = newTopBlock && liftedBlock.classList[1] === newTopBlock.classList[1];
+    //Listen for a click on each container. Attach an event listener to each contianer
+    colorContainers.forEach( function(containerElement){
+        containerElement.addEventListener("click", function(){
+            const clickedContainer = containerElement;  
+            //If a block is already lifted. 
+        if (liftedBlock) {
+            // We already have a lifted block
 
-            if (newContainerIsEmpty || colorsMatch) {
-            // Move lifted block to the new container (empty or matching color)
-            moveBlock(liftedContainer, clickedContainer);
-            resetLifted();
-            
-            if (checkWin(colorContainers)) {
-                handleWin(); 
-            }
-            } else {
-            // Colors don't match, drop lifted block and lift new top block if it exists
-            if (newTopBlock) {
-                liftBlock(newTopBlock, clickedContainer);
-            } else {
+            removeAllLiftedClasses();
+
+            if (clickedContainer !== liftedContainer) {
+                const newTopBlock = getTopBlock(clickedContainer);
+                const newContainerIsEmpty = !newTopBlock;
+                const colorsMatch = newTopBlock && liftedBlock.classList[1] === newTopBlock.classList[1];
+
+                if (newContainerIsEmpty || colorsMatch) {
+                // Move lifted block to the new container (empty or matching color)
+                moveBlock(liftedContainer, clickedContainer);
                 resetLifted();
-            }
+                
+                if (checkWin(colorContainers)) {
+                    handleWin(); 
+                }
+                } else {
+                // Colors don't match, drop lifted block and lift new top block if it exists
+                if (newTopBlock) {
+                    liftBlock(newTopBlock, clickedContainer);
+                } else {
+                    resetLifted();
+                }
+                }
+
+            } else {
+                // Clicked same container as lifted block, so just drop it
+                resetLifted();
+                
             }
 
         } else {
-            // Clicked same container as lifted block, so just drop it
-            resetLifted();
-            
+        // No block is lifted yet, so lift the top block in clicked container
+        const topBlock = getTopBlock(clickedContainer);
+        if (topBlock) {
+            liftBlock(topBlock, clickedContainer);
+        }
         }
 
-    } else {
-    // No block is lifted yet, so lift the top block in clicked container
-    const topBlock = getTopBlock(clickedContainer);
-    if (topBlock) {
-        liftBlock(topBlock, clickedContainer);
-    }
-    }
-
+        });
     });
-});
+}
 
 
-//Add move/drop logic + only allow valid moves
-
-// or when it is the same color as the block in another container. 
-
-
-
-
-//Update DOM visually so the nut “moves”
-
-//Write win-check function
-
-//80–120 min	Test edge cases + Add simple “You Win!” alert
 
 //Restart button logic. 
 //1. Grab button from DOM 
@@ -205,6 +233,27 @@ closeModalButton.addEventListener("click", function(){
 document.getElementById("close-win-modal").addEventListener("click", () => {
   document.getElementById("win-modal").classList.add("hidden");
 });
+
+
+
+
+//Load the JSON data 
+
+fetch("puzzles.json")
+    .then(response => response.json()) //Parsing JSON 
+    .then (data => {
+        //console.log(data)
+        let todaysGame = data[getTodaysPuzzle()];
+        //console.log("Today's game is Game: ", todaysGame.id);
+        blocksPerContainer = todaysGame.blocksPerContainer;
+        console.log("The containers look like this: ", todaysGame.containers);
+        displayGame(todaysGame);
+        
+    }) 
+
+
+
+
 
 /*
 //Load JSON file in JS 

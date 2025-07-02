@@ -1,6 +1,6 @@
 [
     {
-        "id": 1, 
+        "id": 0, 
         "blocksPerContainer" : 4,
         "containers": [
             ["pink", "purple", "blue", "purple"],
@@ -13,7 +13,7 @@
     }, 
 
     {
-        "id": 2, 
+        "id": 1, 
         "blocksPerContainer" : 4,
         "containers": [
             ["yellow", "pink", "blue", "orange"],
@@ -32,7 +32,7 @@
     },
 
     {
-        "id": 3, 
+        "id": 2, 
         "blocksPerContainer" : 4,
         "containers": [
             ["purple", "black", "blue", "crimson"],
