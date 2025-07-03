@@ -1,4 +1,5 @@
 let blocksPerContainer; 
+let moves = 0; 
 
 
 
@@ -149,8 +150,6 @@ function displayGame(todaysGame){
     attachContainerListeners();
 }
 
-
-
 function attachContainerListeners() {
     //Grab all the containers
     const colorContainers = document.querySelectorAll(".container"); 
@@ -164,8 +163,14 @@ function attachContainerListeners() {
             // We already have a lifted block
 
             removeAllLiftedClasses();
+            if (clickedContainer === liftedContainer) {
+                // same container, drop lifted block
+                resetLifted()
+            } 
 
-            if (clickedContainer !== liftedContainer) {
+            //First clicked container is different from second one and the second one is not full 
+            else if (!containerIsFull(clickedContainer)) {
+                 
                 const newTopBlock = getTopBlock(clickedContainer);
                 const newContainerIsEmpty = !newTopBlock;
                 const colorsMatch = newTopBlock && liftedBlock.classList[1] === newTopBlock.classList[1];
@@ -186,24 +191,26 @@ function attachContainerListeners() {
                     resetLifted();
                 }
                 }
+            }
 
-            } else {
-                // Clicked same container as lifted block, so just drop it
-                resetLifted();
+            else if (containerIsFull(clickedContainer)) {
+                // lift top block from the full container
+                const topBlock = getTopBlock(clickedContainer);
+                liftBlock(topBlock, clickedContainer);
                 
             }
 
         } else {
         // No block is lifted yet, so lift the top block in clicked container
         const topBlock = getTopBlock(clickedContainer);
-        if (topBlock) {
-            liftBlock(topBlock, clickedContainer);
-        }
+        liftBlock(topBlock, clickedContainer);
         }
 
         });
     });
 }
+
+
 
 
 
@@ -254,55 +261,4 @@ fetch("puzzles.json")
 
 
 
-
-/*
-//Load JSON file in JS 
-
-fetch("puzzles.json").then(function(response) {
-    return response.json(); //returns text as JS object. 
-}).then(function(gameList){
-    //console.log("Loaded GameList: ", gameList)
-    //Pick today's game using the current date c
-    const today = new Date().getDate();
-    const index = today % gameList.length;
-    const todayGame = gameList[index];
-
-    console.log("Today's game is: ", todayGame); 
-
-    initGame(todayGame);
-
-})
-
-
-
-function initGame(puzzle) {
-  // 1. Clear previous containers
-  const wrapper = document.getElementById("all-containers");
-  wrapper.innerHTML = "";
-
-  // 2. Build new containers based on puzzle
-  puzzle.forEach((containerData) => {
-    const container = document.createElement("div");
-    container.classList.add("container");
-
-    // Add blocks from bottom to top (reverse loop)
-    for (let i = containerData.length - 1; i >= 0; i--) {
-      const block = document.createElement("div");
-      block.classList.add("color-block", containerData[i]);
-      container.appendChild(block);
-    }
-
-    wrapper.appendChild(container);
-  });
-
-  // 3. Update grid layout class
-  wrapper.className = ""; // remove old grid class
-  wrapper.classList.add(`grid-${puzzle.length}`);
-
-  // 4. Reset and reattach event listeners
-  liftedBlock = null;
-  liftedContainer = null;
-  setupContainerListeners();
-}
-*/
 
