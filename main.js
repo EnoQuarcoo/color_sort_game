@@ -306,7 +306,7 @@ fetch("puzzles.json")
     .then(response => response.json()) //Parsing JSON 
     .then (data => {
         //console.log(data)
-        let todaysGame = data[getTodaysPuzzle() + 3];
+        let todaysGame = data[getTodaysPuzzle() ];
         //console.log("Today's game is Game: ", todaysGame.id);
         blocksPerContainer = todaysGame.blocksPerContainer;
         //console.log("The containers look like this: ", todaysGame.containers);

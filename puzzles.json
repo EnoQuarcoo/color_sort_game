@@ -55,8 +55,8 @@
         "id": 3, 
         "blocksPerContainer" : 4,
         "containers": [
-            ["red", "blue", "red", "red"],
-            ["blue", "blue", "red", "green"],
+            ["red", "blue", "blue", "red"],
+            ["blue", "red", "red", "green"],
             ["green", "green", "green", "blue"],
             [],
             []
