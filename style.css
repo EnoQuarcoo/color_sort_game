@@ -53,6 +53,7 @@ body{
     height: 25px;
     margin: 5px auto;
     border-radius: 10px;
+    transition: opacity 0.3s ease
   }
   
 .red { background-color: red; } 

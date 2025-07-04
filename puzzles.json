@@ -49,6 +49,19 @@
             []
         ]
 
+    },
+
+     {
+        "id": 3, 
+        "blocksPerContainer" : 4,
+        "containers": [
+            ["red", "blue", "red", "red"],
+            ["blue", "blue", "red", "green"],
+            ["green", "green", "green", "blue"],
+            [],
+            []
+        ]
+
     }
 ]
 

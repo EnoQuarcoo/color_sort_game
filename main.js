@@ -39,16 +39,71 @@ function resetLifted(){
 }
 
 function moveBlock(fromContainer, toContainer ){
-    const fromBlock = getTopBlock(fromContainer); 
+    //console.log("made a move")
+    let fromBlock = getTopBlock(fromContainer); 
+   // console.log("the from block is ",fromBlock)
     const toBlock = getTopBlock(toContainer); 
+    const fromBlocksColor = fromBlock.classList[1]
+
+
+    
+    //Get all blocks in the fromContainer
+    let blocksInFromContainer = fromContainer.querySelectorAll(".color-block");
+    //console.log("blocks in frorm container",blocksInFromContainer)
+    
+    let sameColorBlocks = []
+    
+    
+    for (let i = blocksInFromContainer.length - 1; i >= 0; i--){
+        if (fromBlocksColor === blocksInFromContainer[i].classList[1]){
+            sameColorBlocks.push(blocksInFromContainer[i]);
+        } else{ 
+            break; 
+        }
+    }
+    //console.log("The same blocks are", sameColorBlocks)
+    //Done with step 1 - identifying the blocks to move. The blocks to move are in sameColorBlocks 
+
 
     const toContainerIsEmpty = !toBlock;
     const sameColor = toBlock && toBlock.classList[1] === fromBlock.classList[1]
+    let spaceAvailable; 
+
+    //if the the toContainer is empty, it should be able to hold the max blocks per container
+    if (toContainerIsEmpty) {
+        spaceAvailable = blocksPerContainer;
+    } else {
+        //it should be the difference b/n the max blocks Per Container - the number of items in the toContainer 
+        spaceAvailable = blocksPerContainer - toContainer.querySelectorAll(".color-block").length
+    }
+    //console.log("the space avaible is ", spaceAvailable)
 
     if (toContainerIsEmpty || sameColor ){
-        const movedBlock = fromContainer.removeChild(fromBlock);
-        toContainer.appendChild(movedBlock); 
+        while (sameColorBlocks.length > 0 && spaceAvailable > 0){
+            let fromBlock = getTopBlock(fromContainer);
+            let movedBlock = fromContainer.removeChild(fromBlock);
+            toContainer.appendChild(movedBlock); 
+            spaceAvailable--;
+            sameColorBlocks.pop()
+
+        }
+        
     } 
+
+    // if (toContainerIsEmpty){
+    //     const movedBlock = fromContainer.removeChild(fromBlock);
+    //     toContainer.appendChild(movedBlock); 
+    // } else if (sameColor){
+    //     const movedBlock = fromContainer.removeChild(fromBlock);
+    //     toContainer.appendChild(movedBlock); 
+    //     while (sameColorBlocks > 0 && toContainer.querySelectorAll(".color-block").length < blocksPerContainer){
+    //         const movedBlock = fromContainer.removeChild(fromBlock);
+    //         toContainer.appendChild(movedBlock); 
+            
+    //     }
+    // }
+    
+
 }
 
 
@@ -123,7 +178,7 @@ function getTodaysPuzzle (){
     const diffInMs = todaysDate - firstDayOfYear  
     const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
     //Calculate what today's game should be 
-    const gameIndex = dayOfYear % 3;
+    const gameIndex = dayOfYear % 4;
     console.log("Today's game is", gameIndex )
     return gameIndex; 
 }
@@ -131,7 +186,7 @@ function getTodaysPuzzle (){
 function displayGame(todaysGame){
     //grab the containers array from that game. 
     numberOfContainers = todaysGame.containers.length
-    console.log("the number of containers is", numberOfContainers);
+    //console.log("the number of containers is", numberOfContainers);
     const allContainersSection = document.querySelector("#all-containers");
     allContainersSection.innerHTML = "";
     todaysGame.containers.forEach((container) => {
@@ -161,7 +216,6 @@ function attachContainerListeners() {
             //If a block is already lifted. 
         if (liftedBlock) {
             // We already have a lifted block
-
             removeAllLiftedClasses();
             if (clickedContainer === liftedContainer) {
                 // same container, drop lifted block
@@ -174,9 +228,10 @@ function attachContainerListeners() {
                 const newTopBlock = getTopBlock(clickedContainer);
                 const newContainerIsEmpty = !newTopBlock;
                 const colorsMatch = newTopBlock && liftedBlock.classList[1] === newTopBlock.classList[1];
-
+                
                 if (newContainerIsEmpty || colorsMatch) {
                 // Move lifted block to the new container (empty or matching color)
+                
                 moveBlock(liftedContainer, clickedContainer);
                 resetLifted();
                 
@@ -204,6 +259,7 @@ function attachContainerListeners() {
         // No block is lifted yet, so lift the top block in clicked container
         const topBlock = getTopBlock(clickedContainer);
         liftBlock(topBlock, clickedContainer);
+        
         }
 
         });
@@ -250,10 +306,10 @@ fetch("puzzles.json")
     .then(response => response.json()) //Parsing JSON 
     .then (data => {
         //console.log(data)
-        let todaysGame = data[getTodaysPuzzle()];
+        let todaysGame = data[getTodaysPuzzle() + 3];
         //console.log("Today's game is Game: ", todaysGame.id);
         blocksPerContainer = todaysGame.blocksPerContainer;
-        console.log("The containers look like this: ", todaysGame.containers);
+        //console.log("The containers look like this: ", todaysGame.containers);
         displayGame(todaysGame);
         
     }) 
