@@ -1,21 +1,28 @@
-body{
-  background-color: #c6ceec;
-  margin: 0;
-  padding: 0;
-
+body {
+    background-color: #0f0f1f;
+    color: #fefefe;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    
 }
 
-#main-header, #other-elements{
-  padding: 30px 50px 0px 10px;
-  text-align: center;
+
+
+#main-header {
   display: flex;
-  gap: 10px;
-  justify-content: right;
-  height: 10px;
-  font-size: 30px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px; /* equal padding on all sides */
+  flex-wrap: nowrap; 
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.chromatica-logo{
+
+
+.chromatica-logo {
   font-size: 3rem;
   background: linear-gradient(90deg, #ff00cc, #3333ff);
   -webkit-background-clip: text;
@@ -24,19 +31,32 @@ body{
   /* no flex-grow or flex-shrink to keep it snug on left */
 }
 
-#all-containers{
-  display: flex; 
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  gap: 50px; 
-  padding: 40px;
-  background-color: #D5DCF9;
-  box-shadow: -8px -8px 15px #eff2ff, 8px 8px 15px #c1c8e8;
-  border-radius: 10px;
-  max-width: 800px;
-  margin-top: 100px;
-  box-sizing: border-box;
+/* Wrap buttons in a container to group them on the right */
+#button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Remove justify-content on #main-header buttons, so no spacing between buttons */
+#main-header button {
+  margin: 0;
+}
+
+
+
+#all-containers {
+    background-color: #191932;
+    box-shadow: -8px -8px 15px #2c2c4d, 8px 8px 15px #050516;
+    border-radius: 10px;
+    padding: 40px;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 50px; 
+    max-width: 800px;
+    margin-top: 100px;
+    box-sizing: border-box;
 }
 
 .container {
@@ -53,7 +73,14 @@ body{
     border-radius: 0px 0px 20px 20px;
 
     
-  }
+}
+.container {
+    background-color: #191932;
+    border-left: 2px solid #333;
+    border-right: 2px solid #333;
+    border-bottom: 2px solid #333;
+    box-shadow: inset -2px -2px 5px #2c2c4d, inset 2px 2px 5px #050516;
+}
 
 
 
@@ -63,10 +90,7 @@ body{
     height: 25px;
     margin: 5px auto;
     border-radius: 10px;
-    transition: opacity 0.3s ease;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: auto;
+    transition: opacity 0.3s ease
   }
   
 .red { background-color: red; } 
@@ -86,7 +110,7 @@ body{
 
 
 .lifted {
-    transform: translateY(-70px); /*moves it up */
+    transform: translateY(-90px); /*moves it up */
     transition: transform 0.3s ease, box-shadow 0.2s ease; /* smooth transition */
 }
 
@@ -131,9 +155,8 @@ centering the content, Being hidden/shown on toggle */
 
 .modal-content h5,
 .modal-content ul li h5 {
-  margin: 0 0 30px 0; 
+  margin: 10px 0;
   font-weight: normal;
-  
 }
 
 .modal-content ul {
@@ -157,19 +180,14 @@ centering the content, Being hidden/shown on toggle */
   background-color: #7c8ddb;
 }
 
-h3 {
-  font-size: 1.17em; /* ~18–24px depending on the base */
-  font-weight: bold;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-}
+
 .minimalist-button{
   background: none;
   border: none;
   font-size: 20px;
   padding: 8px 10px;
   cursor: pointer;
-  color: #333;
+  color: #cccccc;
   font-family: inherit;
   transition: color 0.3s ease, border-bottom 0.3s ease;
   border-bottom: 2px solid transparent;
@@ -181,10 +199,6 @@ h3 {
   
 }
 
-.shareables {
-  font-size :  25px;
-  padding-bottom: 8px;
-}
 
 
 
@@ -221,7 +235,28 @@ h3 {
   }
 
 
+  #main-header {
+    padding: 30px 10px 0 10px;
+  }
+
+  .chromatica-logo {
+    font-size: 2rem; /* shrink the logo text on small screens */
+  }
+
+  #button-group {
+    gap: 1px;
+
+  }
+
+  .minimalist-button {
+    font-size: 16px; /* slightly smaller text */
+    padding: 2px 4px; /* tighter padding */
+  }
+
+
 }
+
+
 
 
 @media (max-width: 850px) and (orientation: landscape) {

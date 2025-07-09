@@ -1,7 +1,41 @@
-let blocksPerContainer; 
+let blocksPerContainer;
 let moves = 0; 
+let firstMoveMade = false;
+let totalTimeSpentAway = 0; 
+let timeAwayStart = 0;
+const todaysDate = new Date(); 
+console.log(localStorage);
+//localStorage.clear()
+devMode = true; 
 
+if (!devMode && todaysDate.toDateString() === localStorage.getItem("lastPlayedDate")) {
+    console.log("Already played today. Showing win screen.");
 
+    const timeDisplay = document.querySelector("#final-time");
+    const movesDisplay = document.querySelector("#total-moves");
+    timeDisplay.innerHTML = "Total Time : " + localStorage.getItem("lastTime");
+    movesDisplay.innerHTML = "Total Moves : " + localStorage.getItem("lastMoves");
+
+    fetch("puzzles.json")
+        .then(response => response.json())
+        .then(data => {
+            let todaysGame = data[getTodaysPuzzle() ];
+            blocksPerContainer = todaysGame.blocksPerContainer;
+            displayGame(todaysGame); // ⚠️ This draws the board
+            handleWin();             // ⬅️ Show the win modal
+            disableGame();
+        });
+        
+} else {
+    fetch("puzzles.json")
+        .then(response => response.json())
+        .then(data => {
+            let todaysGame = data[getTodaysPuzzle()  ];
+            blocksPerContainer = todaysGame.blocksPerContainer;
+            displayGame(todaysGame); // ✅ Draw the board
+            attachContainerListeners(); // ✅ Allow moves
+        });
+}
 
 //Keeps track of what block and container have been lifted 
 let liftedBlock = null; 
@@ -61,10 +95,7 @@ function moveBlock(fromContainer, toContainer ){
             break; 
         }
     }
-    //console.log("The same blocks are", sameColorBlocks)
-    //Done with step 1 - identifying the blocks to move. The blocks to move are in sameColorBlocks 
-
-
+  
     const toContainerIsEmpty = !toBlock;
     const sameColor = toBlock && toBlock.classList[1] === fromBlock.classList[1]
     let spaceAvailable; 
@@ -90,18 +121,8 @@ function moveBlock(fromContainer, toContainer ){
         
     } 
 
-    // if (toContainerIsEmpty){
-    //     const movedBlock = fromContainer.removeChild(fromBlock);
-    //     toContainer.appendChild(movedBlock); 
-    // } else if (sameColor){
-    //     const movedBlock = fromContainer.removeChild(fromBlock);
-    //     toContainer.appendChild(movedBlock); 
-    //     while (sameColorBlocks > 0 && toContainer.querySelectorAll(".color-block").length < blocksPerContainer){
-    //         const movedBlock = fromContainer.removeChild(fromBlock);
-    //         toContainer.appendChild(movedBlock); 
-            
-    //     }
-    // }
+    //Increment the total number of moves. 
+    moves++; 
     
 
 }
@@ -143,6 +164,22 @@ function checkWin(colorContainers){
             allAreWinningContainers = false; 
         }
     }
+    if (allAreWinningContainers == true){
+        stopTime = stopTimer();
+        let elapsedTime = getElapsedTime(startTime, stopTime)
+        const timeDisplay = document.querySelector("#final-time");
+        const movesDisplay = document.querySelector("#total-moves");
+        timeDisplay.innerHTML = "Total Time : " + elapsedTime;
+        movesDisplay.innerHTML = "Total Moves : " + moves; 
+        
+        localStorage.setItem('lastPlayedDate', new Date().toDateString());
+        localStorage.setItem('lastTime', elapsedTime);
+        localStorage.setItem('lastMoves', moves);
+
+        console.log("Saved results to local storage");
+    }
+
+    
 
     return allAreWinningContainers;
     
@@ -162,16 +199,17 @@ function handleWin() {
     });
   }, 100);
 
-  setTimeout(() => {
-  confetti({ particleCount: 80, spread: 60, origin: { y: 0.4 }, zIndex: 2000 });
-  confetti({ particleCount: 60, spread: 100, origin: { y: 0.6 }, zIndex: 2000 });
-} , 100);
+    setTimeout(() => {
+    confetti({ particleCount: 80, spread: 60, origin: { y: 0.4 }, zIndex: 2000 });
+    confetti({ particleCount: 60, spread: 100, origin: { y: 0.6 }, zIndex: 2000 });
+    } , 100);
+
 
 }
 
 function getTodaysPuzzle (){
     //Get today's date 
-    const todaysDate = new Date();
+    
     const currentYear = todaysDate.getFullYear();
     const firstDayOfYear = new Date(currentYear, 0 , 1 );
     //Calculate difference in milliseconds 
@@ -202,8 +240,10 @@ function displayGame(todaysGame){
         })
 
     });
-    attachContainerListeners();
+    
 }
+
+
 
 function attachContainerListeners() {
     //Grab all the containers
@@ -237,6 +277,7 @@ function attachContainerListeners() {
                 
                 if (checkWin(colorContainers)) {
                     handleWin(); 
+                    disableGame();
                 }
                 } else {
                 // Colors don't match, drop lifted block and lift new top block if it exists
@@ -259,6 +300,13 @@ function attachContainerListeners() {
         // No block is lifted yet, so lift the top block in clicked container
         const topBlock = getTopBlock(clickedContainer);
         liftBlock(topBlock, clickedContainer);
+        if (firstMoveMade === false){
+            firstMoveMade = true 
+            startTime = startTimer()
+            startVisisbilityTracking()
+            
+        } 
+
         
         }
 
@@ -266,7 +314,67 @@ function attachContainerListeners() {
     });
 }
 
+function startTimer(){
+    const startTime = Date.now(); 
+    console.log("the start time is",startTime);
+    return startTime;
+}
 
+function stopTimer(){
+    const stopTime = Date.now();
+    console.log("The stop time is", stopTime);
+    return stopTime;
+    //called in checkWin function 
+}
+
+
+function getElapsedTime(startTime, stopTime){
+    let elapsedTimeInMs = stopTime - startTime - totalTimeSpentAway;
+    console.log("elasped time is ", elapsedTimeInMs); 
+
+    const hours = Math.floor(elapsedTimeInMs / (100 * 60 * 60));
+    const minutes = Math.floor((elapsedTimeInMs % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((elapsedTimeInMs % (1000 * 60)) / 1000)
+    
+    const hStr = hours.toString().padStart(2, '0');
+    const mStr = minutes.toString().padStart(2, '0');
+    const sStr = seconds.toString().padStart(2, '0');
+
+    const formattedTime = `${hStr}:${mStr}:${sStr}`;
+    console.log("Total time is ", formattedTime);
+
+    return formattedTime;
+
+}
+
+
+
+
+function startVisisbilityTracking(){
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            timeAwayStart = Date.now()
+            console.log("User left at", timeAwayStart)
+        } else  {
+            let timeAwayStop = Date.now()
+            totalTimeSpentAway += (timeAwayStop - timeAwayStart )
+            console.log("The total time you spent away is ", totalTimeSpentAway)  
+        }
+    });
+    
+
+}
+
+function disableGame() {
+    const containers = document.querySelectorAll(".container");
+    containers.forEach(container => {
+        const newContainer = container.cloneNode(true); // clone the container (no listeners)
+        container.replaceWith(newContainer);            // replace the old container
+
+        // add click listener to the new one
+       newContainer.addEventListener("click", handleWin);
+    });
+}
 
 
 
@@ -302,17 +410,17 @@ document.getElementById("close-win-modal").addEventListener("click", () => {
 
 //Load the JSON data 
 
-fetch("puzzles.json")
-    .then(response => response.json()) //Parsing JSON 
-    .then (data => {
-        //console.log(data)
-        let todaysGame = data[getTodaysPuzzle() ];
-        //console.log("Today's game is Game: ", todaysGame.id);
-        blocksPerContainer = todaysGame.blocksPerContainer;
-        //console.log("The containers look like this: ", todaysGame.containers);
-        displayGame(todaysGame);
+// fetch("puzzles.json")
+//     .then(response => response.json()) //Parsing JSON 
+//     .then (data => {
+//         //console.log(data)
+//         let todaysGame = data[getTodaysPuzzle() + 1 ];
+//         //console.log("Today's game is Game: ", todaysGame.id);
+//         blocksPerContainer = todaysGame.blocksPerContainer;
+//         //console.log("The containers look like this: ", todaysGame.containers);
+//         displayGame(todaysGame);
         
-    }) 
+//     }) 
 
 
 
