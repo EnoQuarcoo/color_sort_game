@@ -57,6 +57,26 @@
             <div class="container">
             </div>
         </section>
+
+        
+        <button onclick="switchMode()" style="display: block; margin: 40px auto 0 auto; padding: 10px 20px; font-size: 16px; border-radius: 8px; background-color: #444; color: white; border: none; cursor: pointer;"
+> 
+        Switch to Dark Mode</button>
+
+        <script>
+        function switchMode() {
+            // Get current file name
+            const current = window.location.pathname;
+
+            // Redirect to the other file
+            if (current.includes('game.html')) {
+            window.location.href = 'game2.html';
+            } else {
+            window.location.href = 'game.html';
+            }
+        }
+        </script>
+
        
         
     </main>
