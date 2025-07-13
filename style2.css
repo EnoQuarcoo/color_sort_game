@@ -100,13 +100,14 @@ body {
 .orange { background-color: #FF8811; }
 .purple { background-color: #5F0A87; }
 .rose { background-color: #AB4E68; }
-.brown { background-color: #B07156; }
+.brown { background-color: #6E260E; }
 .pink { background-color: #DE369D; }
 .black { background-color: black; }
 .grey { background-color: #1B4965; }
 .midnightgreen { background-color: #07393c; }
 .crimson { background-color: #DB324D; }
 .ember { background-color: #F34213; }
+.teal {background-color: teal}
 
 
 .lifted {

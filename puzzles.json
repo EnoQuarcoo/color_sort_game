@@ -35,23 +35,22 @@
         "id": 2, 
         "blocksPerContainer" : 4,
         "containers": [
-            ["purple", "black", "blue", "crimson"],
-            ["orange", "black", "green", "blue"],
-            ["midnightgreen", "red", "grey", "crimson"],
-            ["purple", "yellow", "purple", "yellow"],
-            ["midnightgreen", "red", "grey", "midnightgreen"],
-            ["midnightgreen", "blue", "orange", "grey"],
+            ["purple", "red", "blue", "crimson"],
+            ["orange", "pink", "green", "blue"],
+            ["rose", "red", "crimson", "crimson"],
+            ["purple", "yellow", "pink", "yellow"],
+            ["rose", "red", "pink", "purple"],
+            ["green", "blue", "orange", "rose"],
             ["red", "orange", "crimson", "orange"],
-            ["yellow", "crimson", "yellow", "black"],
-            ["red", "blue", "green", "black"],
-            ["grey", "green", "purple", "green"],
+            ["yellow", "yellow", "rose", "pink"],
+            ["green", "blue", "green", "purple"],
             [],
             []
         ]
 
     },
 
-     {
+    {
         "id": 3, 
         "blocksPerContainer" : 4,
         "containers": [
@@ -62,6 +61,256 @@
             []
         ]
 
+    },
+
+    {
+        "id": 4, 
+        "blocksPerContainer" : 4,
+        "containers": [
+            ["orange", "midnightgreen", "teal", "midnightgreen"],
+            ["pink", "teal", "blue", "orange"],
+            ["teal", "purple", "blue", "green"],
+            ["purple", "brown", "red", "pink"],
+            ["green", "orange", "red", "midnightgreen"],
+            ["orange", "green", "purple", "brown"],
+            ["pink", "red", "teal", "yellow"],
+            ["brown", "yellow", "green", "brown"],
+            ["yellow", "blue", "pink", "blue"],
+            ["purple", "yellow", "red", "midnightgreen"],
+            [],
+            []
+        ]
+
+    },
+    {
+        "id": 5,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["red", "green", "purple", "red"],
+            ["green", "purple", "green", "red"],
+            ["purple", "green", "red", "purple"],
+            []
+        ]
+    },
+    {
+        "id": 6,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["orange", "teal", "green", "blue"],
+            ["crimson", "blue", "green", "orange"],
+            ["teal", "crimson", "green", "blue"],
+            ["orange", "teal", "crimson", "orange"],
+            ["green", "blue", "teal", "crimson"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 7,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["yellow", "red", "teal", "red"],
+            ["teal", "yellow", "yellow", "red"],
+            ["teal", "yellow", "teal", "red"],
+            []
+        ]
+    },
+    {
+        "id": 8,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["blue", "red", "green", "orange"],
+            ["purple", "teal", "green", "red"],
+            ["yellow", "orange", "teal", "blue"],
+            ["pink", "purple", "green", "yellow"],
+            ["teal", "red", "purple", "orange"],
+            ["green", "pink", "red", "yellow"],
+            ["blue", "teal", "pink", "purple"],
+            ["blue", "orange", "pink", "yellow"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 9,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["orange", "purple", "pink", "green"],
+            ["pink", "purple", "orange", "green"],
+            ["green", "pink", "purple", "orange"],
+            ["green", "pink", "purple", "orange"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 10,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["blue", "green", "red", "teal"],
+            ["crimson", "red", "green", "blue"],
+            ["crimson", "teal", "green", "blue"],
+            ["red", "crimson", "teal", "blue"],
+            ["teal", "red", "green", "crimson"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 11,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["purple", "yellow", "orange", "pink"],
+            ["blue", "orange", "pink", "yellow"],
+            ["pink", "purple", "orange", "blue"],
+            ["blue", "purple", "yellow", "pink"],
+            ["orange", "blue", "yellow", "purple"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 12,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["pink", "teal", "green", "grey"],
+            ["crimson", "red", "green", "grey"],
+            ["pink", "red", "crimson", "green"],
+            ["grey", "crimson", "pink", "teal"],
+            ["red", "green", "pink", "crimson"],
+            ["teal", "red", "teal", "grey"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 13,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["purple", "orange", "teal", "blue"],
+            ["green", "pink", "yellow", "teal"],
+            ["crimson", "orange", "blue", "pink"],
+            ["yellow", "green", "crimson", "teal"],
+            ["pink", "blue", "purple", "green"],
+            ["crimson", "purple", "orange", "yellow"],
+            ["teal", "crimson", "pink", "yellow"],
+            ["green", "blue", "orange", "purple"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 14,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["orange", "yellow", "green", "purple"],
+            ["green", "crimson", "teal", "purple"],
+            ["teal", "yellow", "orange", "green"],
+            ["purple", "crimson", "yellow", "teal"],
+            ["purple", "crimson", "orange", "green"],
+            ["yellow", "crimson", "orange", "teal"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 15,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["red", "purple", "pink", "orange"],
+            ["grey", "purple", "green", "pink"],
+            ["green", "orange", "red", "grey"],
+            ["purple", "grey", "orange", "red"],
+            ["pink", "red", "green", "grey"],
+            ["purple", "green", "pink", "orange"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 16,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["blue", "red", "green", "orange"],
+            ["teal", "pink", "yellow", "red"],
+            ["purple", "teal", "green", "yellow"],
+            ["orange", "purple", "blue", "green"],
+            ["pink", "orange", "red", "purple"],
+            ["yellow", "teal", "green", "red"],
+            ["blue", "pink", "teal", "yellow"],
+            ["orange", "blue", "purple", "pink"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 17,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["purple", "orange", "teal", "blue"],
+            ["green", "pink", "yellow", "teal"],
+            ["crimson", "orange", "blue", "pink"],
+            ["yellow", "green", "crimson", "teal"],
+            ["pink", "blue", "purple", "green"],
+            ["crimson", "purple", "orange", "yellow"],
+            ["teal", "crimson", "pink", "yellow"],
+            ["green", "blue", "orange", "purple"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 18,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["red", "purple", "blue", "yellow"],
+            ["pink", "purple", "blue", "red"],
+            ["yellow", "red", "pink", "blue"],
+            ["purple", "yellow", "red", "pink"],
+            ["blue", "yellow", "purple", "pink"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 19,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["teal", "orange", "green", "crimson"],
+            ["purple", "green", "blue", "pink"],
+            ["orange", "blue", "teal", "purple"],
+            ["crimson", "green", "orange", "blue"],
+            ["teal", "pink", "purple", "green"],
+            ["pink", "crimson", "teal", "orange"],
+            ["blue", "pink", "crimson", "purple"],
+            [],
+            []
+        ]
+    },
+    {
+        "id": 20,
+        "blocksPerContainer": 4,
+        "containers": [
+            ["grey", "green", "orange", "blue"],
+            ["purple", "red", "brown", "yellow"],
+            ["teal", "pink", "red", "orange"],
+            ["green", "blue", "brown", "teal"],
+            ["yellow", "grey", "pink", "green"],
+            ["purple", "orange", "teal", "blue"],
+            ["brown", "grey", "red", "purple"],
+            ["pink", "red", "yellow", "blue"],
+            ["grey", "yellow", "purple", "pink"],
+            ["orange", "brown", "green", "teal"],
+            [],
+            []
+        ]
     }
+
+
+
+
+
+
+
 ]
 
