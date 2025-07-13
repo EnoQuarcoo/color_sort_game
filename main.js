@@ -19,7 +19,7 @@ if (!devMode && todaysDate.toDateString() === localStorage.getItem("lastPlayedDa
     fetch("puzzles.json")
         .then(response => response.json())
         .then(data => {
-            let todaysGame = data[getTodaysPuzzle() - 1];
+            let todaysGame = data[getTodaysPuzzle() ];
             console.log("the game id is ", todaysGame.id);
             blocksPerContainer = todaysGame.blocksPerContainer;
             displayGame(todaysGame); // ⚠️ This draws the board
@@ -31,7 +31,7 @@ if (!devMode && todaysDate.toDateString() === localStorage.getItem("lastPlayedDa
     fetch("puzzles.json")
         .then(response => response.json())
         .then(data => {
-            let todaysGame = data[getTodaysPuzzle() - 1];
+            let todaysGame = data[getTodaysPuzzle() ];
             console.log(todaysGame.id)
             blocksPerContainer = todaysGame.blocksPerContainer;
             displayGame(todaysGame); // ✅ Draw the board
