@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page </title>
-    <link rel="stylesheet" href="landing.css">
-    <!-- MailerLite Universal -->
-    <script>
-        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-        ml('account', '1635420');
-    </script>
-    <!-- End MailerLite Universal -->
+    <title>Nut Color Sort</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZXXSYJ69B"></script>
     <script>
@@ -26,55 +18,95 @@
     <!-- End Google tag (gtag.js) -->
 </head>
 <body>
+    <header id="main-header">
+        <!-- <h1 class="chromatica-logo">Chromatica</h1> -->
+        <div id="button-group">
+            <button id="how-to-play-button" class="minimalist-button">How to Play</button> 
+            <button id="restart-button" class="minimalist-button">Restart</button>
+        </div>
+    </header>
+
     <main>
-        <section id="headline">
-            <h1> Chromatica </h1>
-            
-            <h2> Sort the Colors. Play daily. Beat the clock. Share your score. Repeat. </h2>
-            <h3> Launches July 12th! </h3>
-
+        <section id="all-containers">
+            <div class="container">
+                <div class="color-block red"></div>
+                <div class="color-block red"></div>
+                <div class="color-block red"></div>
+                <div class="color-block purple"></div>
+            </div>
+            <div class="container">
+                <div class="color-block red"></div>
+                <div class="color-block blue"></div>
+                <div class="color-block yellow"></div>
+                <div class="color-block purple"></div>
+            </div>
+            <div class="container">
+                <div class="color-block blue"></div>
+                <div class="color-block yellow"></div>
+                <div class="color-block red"></div>
+                <div class="color-block yellow"></div>
+            </div>
+            <div class="container">
+                <div class="color-block purple"></div>
+                 <div class="color-block red"></div>
+                  <div class="color-block yellow"></div>
+                  <div class="color-block pink"></div>
+            </div>
+            <div class="container">
+            </div>
+            <div class="container">
+            </div>
         </section>
 
         
+        <button onclick="switchMode()" style="display: block; margin: 40px auto 0 auto; padding: 10px 20px; font-size: 16px; border-radius: 8px; background-color: #444; color: white; border: none; cursor: pointer;"
+> 
+        Switch to Dark Mode</button>
 
-        <section id="email-funnel">
-            <div class="ml-embedded" data-form="edGs8j"></div>
-        </section>
+        <script>
+        function switchMode() {
+            // Get current file name
+            const current = window.location.pathname;
+
+            // Redirect to the other file
+            if (current.includes('index.html')) {
+            window.location.href = 'game2.html';
+            } else {
+            window.location.href = 'index.html';
+            }
+        }
+        </script>
+
+       
         
-
-        <section id="countdown-timer">
-            <h1> 3 days </h1>
-            <h3> Days Till Launch </h3>
-        </section>
-        <section id="img-section">
-            <img src="images/chromaticaimg.jpg" alt="Image of the Game" width="188">
-        </section>
     </main>
-    <script>
-  function updateCountdown() {
-    const launchDate = new Date('2025-07-14T00:00:00'); // Set launch date here
-    const today = new Date();
-    const diffTime = launchDate - today;
-    const diffDays = Math.max(Math.ceil(diffTime / (1000 * 60 * 60 * 24)), 0); // No negatives
+    <section id="other-elements">
+        <div id="win-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>You Win! 🎉</h3>
+                <h5> Come back tomorrow for a fresh new puzzle! </h5>
+                <div id="final-time" class="shareables"></div>
+                <div id="total-moves" class="shareables"></div>
+                <button class="close-modal-btn" id="close-win-modal">Play again tomorrow </button>
+            </div>
+        </div>
 
-    // Update the countdown number in the page
-    const countdownNumber = document.querySelector('#countdown-timer h1');
-    countdownNumber.textContent = diffDays;
+        <div id="how-to-play-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>How to Play</h3>
+                <h5> Sort the colorful blocks so each tube holds only one color</h5>
+                <h5> You can move a block if: </h5>
+                <ul>
+                    <li><h5>The new tube is empty, or </h5></li>
+                    <li><h5>The block matches the top color in the new tube </h5></li>
+                </ul>
+                <h5>Think ahead, use strategy, and don't get stuck!</h5>
+                <h5> Can you sort them all? 🌈🧩</h5>
+                <button class="close-modal-btn" id="close-how-to-play-modal" > Close </button>
+            </div>
+        </div>
+        </section>
 
-    // Optional: If 0 days, you can show something else (like "Launch Day!")
-    if (diffDays === 0) {
-      countdownNumber.textContent = "Launch Day!";
-    }
-  }
-
-  // Run once on page load
-  updateCountdown();
-
-  // Optional: update every 24 hours
-  setInterval(updateCountdown, 1000 * 60 * 60 * 24);
-</script>
-
-    
+        <script src="main.js"></script>
 </body>
 </html>
-
