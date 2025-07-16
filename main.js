@@ -218,7 +218,7 @@ function getTodaysPuzzle (){
     const diffInMs = todaysDate - firstDayOfYear  
     const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
     //Calculate what today's game should be 
-    const gameIndex = dayOfYear % 4;
+    const gameIndex = dayOfYear % puzzles.length;
     console.log("Today's game is", gameIndex )
     return gameIndex; 
 }
